@@ -1,0 +1,51 @@
+modules = ["bash", "nodejs-20", "postgresql-16"]
+[agent]
+expertMode = true
+
+[nix]
+channel = "stable-25_05"
+
+[userenv]
+
+[userenv.shared]
+DB_PROVIDER = "sqlite"
+HTTP_HOST = "0.0.0.0"
+HTTP_PORT = "5000"
+PUBLISH_COMMANDS = "true"
+
+[userenv.development]
+HTTP_EXTERNAL = "https://e5bb2504-77fc-47b4-b5b1-88da6b085887-00-365jknd6mvfjt.spock.replit.dev"
+
+[userenv.production]
+HTTP_EXTERNAL = "https://bot--peterburke12200.replit.app"
+
+[workflows]
+runButton = "Project"
+
+[[workflows.workflow]]
+name = "Project"
+mode = "parallel"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Start application"
+
+[[workflows.workflow]]
+name = "Start application"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "echo 'Bot runs in production only. This dev workflow is intentionally idle.' && sleep infinity"
+
+[workflows.workflow.metadata]
+outputType = "webview"
+
+[[ports]]
+localPort = 5000
+externalPort = 80
+
+[deployment]
+deploymentTarget = "vm"
+run = ["node", "."]
