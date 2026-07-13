@@ -47,7 +47,7 @@ const env = {
 };
 
 const load = options => {
-	dotenv.config(options);
+	dotenv.config({ path: require('path').join(__dirname, '..', '.env'), ...options });
 	Object.entries(env).forEach(([name, validate]) => {
 		const result = validate(process.env[name]); // `true` for pass, or `Error` for fail
 		if (result instanceof Error) {
@@ -61,3 +61,4 @@ module.exports = {
 	env,
 	load,
 };
+
