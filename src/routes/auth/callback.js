@@ -61,7 +61,7 @@ module.exports.get = () => ({
 			httpOnly: true,
 			maxAge: data.expires_in,
 			path: '/',
-			sameSite: 'Lax',
+			sameSite: 'Lax',\n\t\tsecure: process.env.HTTP_EXTERNAL?.startsWith('https'),
 			secure: false,
 		});
 		res.header('Content-Type', 'text/html');
@@ -74,4 +74,5 @@ module.exports.get = () => ({
 `);
 	},
 });
+
 
