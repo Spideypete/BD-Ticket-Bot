@@ -194,7 +194,7 @@ module.exports = async client => {
 
 	// start the fastify server
 	fastify.listen({
-		host: process.env.HTTP_HOST,
+		host: '0.0.0.0', // forced for Wispbyte deployment
 		port: process.env.HTTP_PORT,
 	}, (err, addr) => {
 		if (err) {
@@ -211,3 +211,4 @@ module.exports = async client => {
 		client.log.error.http(`SvelteKit ${errorId} ${error}`);
 	});
 };
+
