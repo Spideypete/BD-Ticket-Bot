@@ -1,1 +1,1 @@
-require('./src/index.js')
+process.chdir(__dirname); require('./src/index.js');
